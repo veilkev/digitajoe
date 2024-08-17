@@ -1,0 +1,13 @@
+---
+deployment:
+  tasks:
+    - export DEPLOY_PATH=/home/veilkro/digitajoe.com/
+    - export LOG_FILE=${DEPLOY_PATH}/deployment_log.txt
+    - echo "Starting deployment at $(date)" | tee -a ${LOG_FILE}
+    - echo "Deploying application to ${DEPLOY_PATH}" | tee -a ${LOG_FILE}
+    
+    # Copy only specific files and directories
+    - /bin/cp -r public ${DEPLOY_PATH}
+    - /bin/cp server.js ${DEPLOY_PATH}
+    
+    - echo "Deployment completed at $(date)" | tee -a ${LOG_FILE}
