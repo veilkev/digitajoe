@@ -1,6 +1,8 @@
+require('dotenv').config();
+
 const { exec } = require('child_process');
 
-const command = 'ssh -p 21098 veilkro@digitajoe.com "/home/veilkro/digitajoe.com/deploy.sh"';
+const command = `ssh -p ${process.env.SSH_PORT} ${process.env.SSH_USER}@${process.env.SSH_HOST} "/home/veilkro/digitajoe.com/deploy.sh"`;
 
 exec(command, (error, stdout, stderr) => {
   if (error) {
