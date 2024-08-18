@@ -1,8 +1,12 @@
 require('dotenv').config()
 const express = require('express')
 const path = require('path')
+
+
 const passport = require('passport')
 const portconf = require('./passport-config')
+const session = require('express-session');
+const methodOverride = require('method-override');
 
 
 // Initialize the Express app
