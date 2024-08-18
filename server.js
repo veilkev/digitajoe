@@ -1,45 +1,14 @@
-/*****************************************************/
-/*               Dynamic Package Manager             */
-/*****************************************************/
+require('dotenv').config()
+const express = require('express')
+const flash = require('express-flash');
+const path = require('path')
+const pool = require('./db');
 
-const { execSync } = require('child_process');
-const { clear } = require('console');
-
-// Function to handle installing a missing module
-function installModule(moduleName) {
-  console.log(`Module "${moduleName}" is missing. Installing...`);
-  execSync(`npm install ${moduleName}`, { stdio: 'inherit' });
-}
-
-// Function to require a module and install it if it's not found
-function include(moduleName) {
-  try {
-    return require(moduleName);
-  } catch (err) {
-    if (err.code === 'MODULE_NOT_FOUND') {
-      installModule(moduleName);
-      return require(moduleName); // Re-require after installation
-    } else {
-      throw err; // Rethrow if it's another error
-    }
-  }
-}
-
-/*****************************************************/
-/*                      Server                       */
-/*****************************************************/
-
-include('dotenv').config()
-const express = include('express')
-const flash = include('express-flash');
-const path = include('path')
-const pool = include('./db');
-
-const bcrypt = include('bcrypt');
-const passport = include('passport')
-const portconf = include('./passport-config')
-const session = include('express-session');
-const methodOverride = include('method-override');
+const bcrypt = require('bcrypt');
+const passport = require('passport')
+const portconf = require('./passport-config')
+const session = require('express-session');
+const methodOverride = require('method-override');
 
 
 // Initialize the Express app
