@@ -4,7 +4,7 @@ require('dotenv').config();
 // Development & Production variables
 // const connect = process.env.NODE_ENV === 'development' ? process.env.DEV_CONNECT : process.env.PROD_CONNECT;
 const dbHost = process.env.NODE_ENV === 'DEV' ? process.env.DEV_URL : process.env.LIVE_URL
-const dbPort = process.env.NODE_ENV === 'DEV' ? process.env.DEV_PORT : process.env.LIVE_PORT
+const dbPort = process.env.NODE_ENV === 'DEV' ? process.env.DEgitV_PORT : process.env.LIVE_PORT
 const dbName = process.env.DB_NAME
 const dbUser = process.env.DB_USER
 const dbPass = process.env.DB_PASS
