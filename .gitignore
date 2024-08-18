@@ -2,3 +2,5 @@ node_modules
 temp
 .env
 creds.md
+deploy.sh 
+log.sh 
