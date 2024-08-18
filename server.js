@@ -61,9 +61,49 @@ app.use(methodOverride('_method'));
 // Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public/login', 'login.html'));
+// Render different EJS views based on query parameter
+app.get('/', checkAuthenticated, (req, res) => {
+  const view = req.query.view || 'home'; // Default to home if no query parameter is provided
+  res.render(view, { name: req.user.name });
 });
+
+// Login route
+app.get('/login', checkNotAuthenticated, (req, res) => {
+  const message = req.session.messages ? req.session.messages[0] : null;
+  req.session.messages = [];
+  res.render('login.ejs', { message });
+});
+
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+  successRedirect: '/',
+  failureRedirect: '/login',
+  failureFlash: true
+}));
+
+// Logout route
+app.post('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) { return next(err); }
+    res.redirect('/login');
+  });
+});
+
+// Authentication check middleware
+function checkAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+  res.redirect('/login');
+}
+
+function checkNotAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return res.redirect('/');
+  }
+  next();
+}
+
+
 
 // Start the server
 app.listen(port, () => {
