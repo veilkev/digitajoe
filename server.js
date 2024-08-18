@@ -75,7 +75,8 @@ app.get('/', checkAuthenticated, (req, res) => {
 app.get('/login', checkNotAuthenticated, (req, res) => {
   const message = req.session.messages ? req.session.messages[0] : null;
   req.session.messages = [];
-  res.render('login.ejs', { message });
+  res.redirect('/login');
+  //res.render('login.ejs', { message });
 });
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
