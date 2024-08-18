@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "./portkill.sh",
     "deploy": "./deploy.sh",
+    "deploy:reset": "./deploy.sh --reset",
     "log": "./log.sh",
     "daemon": "nodemon server.js"
   },
