@@ -5,10 +5,10 @@
   "main": "deploy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "server": "./portkill.sh",
     "deploy": "./deploy.sh",
     "log": "./log.sh",
-    "server": "nodemon server.js"
+    "daemon": "nodemon server.js"
   },
   "keywords": [],
   "author": "",
