@@ -39,7 +39,7 @@ async function initialize(passport) {
     } catch (error) {
       done(error);
     }
-  });
+  }); 
 }
 
 module.exports = initialize;
