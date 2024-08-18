@@ -77,7 +77,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
   req.session.messages = [];
 
   // Serve the index.html file from the 'public' directory
-  res.sendFile(path.join(__dirname, 'public/login', 'index.html'));
+  res.sendFile(path.join(__dirname, 'public/login', 'login.html'));
 });
 
 app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
