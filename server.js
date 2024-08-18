@@ -1,8 +1,10 @@
 require('dotenv').config()
 const express = require('express')
+const flash = require('express-flash');
 const path = require('path')
+const pool = require('./db');
 
-
+const bcrypt = require('bcrypt');
 const passport = require('passport')
 const portconf = require('./passport-config')
 const session = require('express-session');
