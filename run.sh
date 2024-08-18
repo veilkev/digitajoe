@@ -6,3 +6,4 @@ git merge dev
 git add .
 git push
 npm run deploy
+git checkout dev
