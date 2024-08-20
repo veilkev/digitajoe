@@ -1,6 +1,7 @@
 const LocalStrategy = require('passport-local').Strategy;
+const flash = require('connect-flash');
 const bcrypt = require('bcrypt');
-const createPool = require('./db');
+const createPool = require('./auth');
 
 async function initialize(passport) {
   const pool = await createPool();
@@ -39,7 +40,7 @@ async function initialize(passport) {
     } catch (error) {
       done(error);
     }
-  }); 
+  });
 }
 
 module.exports = initialize;

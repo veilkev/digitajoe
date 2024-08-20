@@ -5,8 +5,8 @@ require('dotenv').config();
 const dbHost = process.env.DEV_URL
 const dbPort = process.env.NODE_ENV === 'DEV' ? process.env.DB_PORT : process.env.LIVE_PORT
 const dbName = process.env.AUTH_NAME
-const dbUser = process.env.DB_USER
-const dbPass = process.env.DB_PASS
+const dbUser = process.env.AUTH_USER
+const dbPass = process.env.AUTH_PASS
 
 console.log(dbHost)
 console.log(dbPort)

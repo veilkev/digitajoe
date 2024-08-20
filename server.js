@@ -1,19 +1,16 @@
-require('dotenv').config()
-const express = require('express')
-const flash = require('express-flash');
-const path = require('path')
-const pool = require('./db');
-
-const bcrypt = require('bcrypt');
-const passport = require('passport')
-const portconf = require('./passport-config')
+require('dotenv').config();
+const express = require('express');
 const session = require('express-session');
+const flash = require('connect-flash');
+const path = require('path');
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const portconf = require('./passport-config');
 const methodOverride = require('method-override');
 
-
 // Initialize the Express app
-const app = express()
-const port = 3000
+const app = express();
+const port = process.env.NODE_ENV === 'DEV' ? process.env.DEV_PORT : process.env.LIVE_PORT;
 
 /*****************************************************/
 /*                 Parse JSON Files                  */
@@ -21,10 +18,10 @@ const port = 3000
 
 // Middleware setup
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // Parse EJS files
 app.set('view engine', 'ejs');
-app.use(express.urlencoded({ extended: false }));
 
 /*****************************************************/
 /*                Route Directory Paths              */
@@ -32,11 +29,11 @@ app.use(express.urlencoded({ extended: false }));
 
 //const ipmRoute = require('./routes/ipm');
 
-
 /*****************************************************/
 /*                    Passport                       */
 /*****************************************************/
 
+// Initialize Passport configuration
 portconf(passport);
 
 app.use(session({
@@ -47,10 +44,28 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000 // Session expires after 24 hours of inactivity
   }
 }));
+
+// Initialize connect-flash
+app.use(flash());
+
+// Initialize Passport and restore authentication state, if any, from the session
 app.use(passport.initialize());
 app.use(passport.session());
+
+// Method override for supporting PUT and DELETE in forms
 app.use(methodOverride('_method'));
 
+/*****************************************************/
+/*           Flash Messages Middleware               */
+/*****************************************************/
+
+// Make flash messages available in all views
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash('success_msg');
+  res.locals.error_msg = req.flash('error_msg');
+  res.locals.error = req.flash('error'); // Passport's default flash message
+  next();
+});
 
 /*****************************************************/
 /*                Route Server Paths                 */
@@ -58,7 +73,6 @@ app.use(methodOverride('_method'));
 
 // Mount the routes
 //app.use('/api', ipmRoute);
-
 
 /*****************************************************/
 /*           (Serve) HTML/CSS/JAVASCRIPT             */
@@ -78,7 +92,7 @@ app.get('/login', checkNotAuthenticated, (req, res) => {
   const message = req.session.messages ? req.session.messages[0] : null;
   req.session.messages = [];
 
-  // Serve the index.html file from the 'public' directory
+  // Serve the login.html file from the 'public' directory
   res.sendFile(path.join(__dirname, 'public/login', 'login.html'));
 });
 
@@ -110,8 +124,6 @@ function checkNotAuthenticated(req, res, next) {
   }
   next();
 }
-
-
 
 // Start the server
 app.listen(port, () => {
