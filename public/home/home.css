@@ -1,46 +1,46 @@
-    /* Adjusting the search box to be smaller */
-    .search-box {
-        display: flex;
-        align-items: center;
-        border: 2px solid #7b61ff;
-        border-radius: 5px;
-        padding: 5px 10px;
-        width: 300px;
-        max-width: 100%;
-        margin-right: 15px; /* Add some margin to the right for better spacing */
-      }
+/* Adjusting the search box to be smaller */
+.search-box {
+  display: flex;
+  align-items: center;
+  border: 2px solid #7b61ff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 300px;
+  max-width: 100%;
+  margin-right: 15px; /* Add some margin to the right for better spacing */
+}
 
-      .search-box i {
-        color: #7b61ff;
-        font-size: 16px;
-        margin-right: 8px;
-      }
+.search-box i {
+  color: #7b61ff;
+  font-size: 16px;
+  margin-right: 8px;
+}
 
-      .search-box input {
-        border: none;
-        outline: none;
-        width: 100%;
-        font-size: 14px;
-      }
+.search-box input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: 14px;
+}
 
-      .search-box input::placeholder {
-        color: #6c757d;
-      }
+.search-box input::placeholder {
+  color: #6c757d;
+}
 
-      /* Styling for the notification icon */
-      .notification-icon {
-        position: relative;
-        margin-left: 15px;
-        color: black; /* Make the bell icon black */
-      }
+/* Styling for the notification icon */
+.notification-icon {
+  position: relative;
+  margin-left: 15px;
+  color: black; /* Make the bell icon black */
+}
 
-      .notification-icon .badge {
-        position: absolute;
-        top: -5px;
-        right: -10px;
-        font-size: 10px;
-        padding: 5px 7px;
-        border-radius: 50%;
-        background-color: #dc3545; /* Red background for the badge */
-        color: white;
-      }
+.notification-icon .badge {
+  position: absolute;
+  top: -5px;
+  right: -10px;
+  font-size: 10px;
+  padding: 5px 7px;
+  border-radius: 50%;
+  background-color: #dc3545; /* Red background for the badge */
+  color: white;
+}
