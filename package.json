@@ -5,11 +5,11 @@
   "main": "deploy.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "./portkill.sh",
-    "deploy": "./deploy.sh",
-    "deploy:reset": "./deploy.sh --reset",
-    "log": "./log.sh",
-    "clean": "./prettier.sh",
+    "server": "./bash/portkill.sh",
+    "deploy": "./bash/deploy.sh",
+    "deploy:reset": "./bash/deploy.sh --reset",
+    "log": "./bash/log.sh",
+    "clean": "./bash/prettier.sh",
     "daemon": "nodemon server.js"
   },
   "keywords": [],
