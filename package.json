@@ -9,6 +9,7 @@
     "deploy": "./deploy.sh",
     "deploy:reset": "./deploy.sh --reset",
     "log": "./log.sh",
+    "clean": "./prettier.sh",
     "daemon": "nodemon server.js"
   },
   "keywords": [],
